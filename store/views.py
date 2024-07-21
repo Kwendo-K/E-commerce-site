@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product, Category
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from access.forms import RegisterUserForm, ProfileForm
@@ -61,7 +61,23 @@ def register_user(request):
     )
 
 
+def product_detail(request, pk):
+    product = Product.objects.get(id=pk)
+    return render(request, "store/product.html", {"product": product})
+
+
 def logout_user(request):
     logout(request)
     messages.success(request, "Logged Out")
     return redirect("home")
+
+def category(request, foo):
+    foo = foo.replace("-", " ") #replacing hyphens with spaces
+
+    try:
+        category = Category.objects.get(name=foo)
+        product = Product.objects.get(category=category)
+        return render(request, "store/category.html", {"product": product, "category": category})
+    except:
+        messages.success(request, "The category selected is not available") 
+        return redirect("home")

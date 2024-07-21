@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
-<body>
+<body class="vh-100">
     {% include 'store/navbar.html' %}
     <div>
         {% if messages %}
@@ -28,9 +28,11 @@
             {% endfor %}
         {% endif %}
     </div>
+    
     {% block content %}
     
     {% endblock %}
+    {% include 'store/footer.html' %}
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

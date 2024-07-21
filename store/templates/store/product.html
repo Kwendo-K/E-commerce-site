@@ -1,0 +1,41 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container vh-100">
+    
+    <div class="col-lg-6 offset-md-3">
+        <h4 class="text-center">Product Details</h4>
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Name: {{ product.name }}</h5>
+                    <p class="card-text"><small>{{ product.description }}.</small></p>
+                    <!-- <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p> -->
+                    
+                    <p>
+                        {% if product.on_sale %}
+                            <div class="d-flex justify-content-center small text-warning mb-2">
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                                <div class="">On Sale..!!</div>
+                                <div class="bi-star-fill"></div>
+                                <div class="bi-star-fill"></div>
+                            </div>
+                            Price: <span class="text-muted text-decoration-line-through">${{ product.price }}&nbsp;</span>
+                            ${{ product.on_sale_price }}
+                        {% else %}
+                            Price: ${{ product.price }}
+                        {% endif %}
+                    </p>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
