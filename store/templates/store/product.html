@@ -31,6 +31,7 @@
                             Price: ${{ product.price }}
                         {% endif %}
                     </p>
+                    <button type="button" value="{{product.id}}" id="add-cart" class="btn btn-outline-warning mt-auto">Add to cart</button>
                 </div>
                 
                 </div>
@@ -39,3 +40,24 @@
     </div>
 </div>
 {% endblock %}
+
+<script>
+    $(document).on('click', '#add-cart', function(e){
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'add_to_cart' %}",
+            data: {
+                product_id: $('#add-cart').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post',
+            },
+            success: function(json){
+                console.log(json);
+            },
+            error: function(xhr, errormsg, err){
+                
+            },
+        })
+    })
+</script>
